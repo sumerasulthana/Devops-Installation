@@ -102,7 +102,11 @@ docker install commands:
 
 yum install docker -y && systemctl start docker && systemctl enable docker
 ----------------------------------
+install jenkins and docker at a once
 
+ yum install jenkins docker -y  && systemctl start docker jenkins && systemctl enable docker jenkins
+
+-----------------------------------
 Trivy:
 
 curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.50.4
