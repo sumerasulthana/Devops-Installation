@@ -1,2 +1,19 @@
 Kops installation:
-kops create cluster --name sumera.k8s.local --zones us-east-2a,us-east-2b --master-count 1 --master-size c7i-flex.large --master-volume-size 30 --node-count 2 --node-size t3.micro --node-volume-size 20 --image=ami-0e5497a77ef21b5ac
+curl -Lo kops https://github.com/kubernetes/kops/releases/download/$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d '"' -f 4)/kops-linux-amd64
+chmod +x kops
+sudo mv kops /usr/local/bin/kops
+
+Kubectl installation:
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+chmod +x kubectl
+sudo mv kubectl /usr/local/bin/
+
+export to S3 bucket:
+export kOPS_STATE_STORE=s3://bucket1-kops-1
+Create cluster:
+kops create cluster --name sumera.k8s.local --zones us-east-2a,us-east-2b --master-count 1 --master-size m7i-flex.large --master-volume-size 30 --node-count 2 --node-size c7i-flex.large --node-volume-size 20 --image=ami-01e4a7224fcbfe81f
+
+delete the cluster:
+kops delete cluster --name sumera.k8s.local --yes
+
+------------------------------------------------------------------------------------------------
